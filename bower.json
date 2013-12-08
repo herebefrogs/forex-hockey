@@ -2,7 +2,11 @@
   "name": "oanda-hack-dec2013-d475g",
   "version": "0.0.0",
   "dependencies": {
-    "jquery": "~1.10.2"
+    "EaselJS": "*",
+    "jquery": "~1.10.2",
+    "requirejs": "~2.1.9",
+    "SoundJS": "*",
+    "TweenJS": "*"
   },
   "devDependencies": {}
 }

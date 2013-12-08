@@ -3,3 +3,7 @@ dist
 .tmp
 .sass-cache
 app/bower_components
+*.swo
+*.swp
+assets
+.DS_Store
