@@ -9,8 +9,15 @@ require.config
     SoundJS: '../bower_components/SoundJS/lib/soundjs-0.5.1.min'
     TweenJS: '../bower_components/TweenJS/lib/tweenjs-0.5.0.min'
 
-require ['jquery'], () ->
+require ['jquery', 'RateHockey' ], () ->
   'use strict'
 
+  RateHockey = require 'RateHockey'
+
+  # sound hack for mobile: closure to have a touch event
+  # in the callstack when loading/playing files through SoundJS
   $('#splash').on 'click', ->
-    alert 'victory screen dance'
+    game = new RateHockey()
+
+    # in the final game, this won't happen right away
+    setTimeout (-> game.showVictoryScreen()), 1000
