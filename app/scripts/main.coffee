@@ -9,5 +9,8 @@ require.config
     SoundJS: '../bower_components/SoundJS/lib/soundjs-0.5.1.min'
     TweenJS: '../bower_components/TweenJS/lib/tweenjs-0.5.0.min'
 
-require [], () ->
+require ['jquery'], () ->
   'use strict'
+
+  $('#splash').on 'click', ->
+    alert 'victory screen dance'
