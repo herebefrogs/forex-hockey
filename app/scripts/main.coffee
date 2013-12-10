@@ -3,6 +3,7 @@ require.config
     TweenJS:
       deps: [ 'EaselJS' ]
       exports: 'createjs'
+
   paths:
     EaselJS: '../bower_components/EaselJS/lib/easeljs-0.7.0.min'
     jquery: '../bower_components/jquery/jquery.min'
@@ -16,8 +17,9 @@ require ['jquery', 'RateHockey' ], () ->
 
   # sound hack for mobile: closure to have a touch event
   # in the callstack when loading/playing files through SoundJS
-  $('#splash').on 'click', ->
-    game = new RateHockey()
 
-    # in the final game, this won't happen right away
-    setTimeout (-> game.showVictoryScreen()), 1000
+  # TODO uncomment... bypassed to develop faster
+  #$('#splash').on 'click', ->
+  game = new RateHockey()
+
+  game.showGameScreen()

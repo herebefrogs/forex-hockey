@@ -40,9 +40,17 @@ body {
   text-align: center;
 }
 
+#game canvas {
+  border: solid 1px white;
+}
+
 
 /* screen transitions */
 body[data-show=splash] #splash {
+  display: block;
+}
+
+body[data-show=game] #game {
   display: block;
 }
 
