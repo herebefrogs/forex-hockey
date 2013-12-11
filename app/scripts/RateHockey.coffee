@@ -58,6 +58,9 @@ define [ 'require'
         probabilityDivider: 20
         # time in ms for a puck to appear once created
         puckFadeIn: 750
+        # time in ms for score animation when a goal is scored
+        scoreBounce: 250
+
 
     showGameScreen: ->
       $('body').attr 'data-show', 'game'

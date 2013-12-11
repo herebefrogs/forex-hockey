@@ -13,19 +13,22 @@ define [ 'require'
       @millions = new createjs.Text @getScore(), 'bold 32px "Press Start 2P"', 'white'
       @currency = new createjs.Text "", 'bold 32px "Press Start 2P"', 'white'
 
+      @millions.regX = @millions.getMeasuredWidth() / 2
+      @millions.regY = @millions.getMeasuredHeight() / 2
+
       if flipped
         @millions.rotation = 180
-        @millions.x = width - 50
+        @millions.x = width - 50 - @millions.regX
         @currency.rotation = 180
         @currency.x = 150
-        @millions.y = height + 50
+        @millions.y = height + 50 - @millions.regY
         @currency.y = height + 50
         @goal.x = 0
         @goal.y = 0
       else
-        @millions.x = 50
+        @millions.x = 50 + @millions.regX
         @currency.x = width - 150
-        @millions.y = height - 50
+        @millions.y = height - 50 + @millions.regY
         @currency.y = height - 50
         @goal.x = 0
         @goal.y = height - 75
@@ -52,6 +55,14 @@ define [ 'require'
       # TODO eye candy, make the million board wiggle with a tween
       @millions.set
         text: @getScore currency
+      createjs.Tween.get(@millions).to(
+        scaleX: 2
+        scaleY: 2
+      , @options.scoreBounce, createjs.Ease.easeOut).to(
+        scaleX: 1
+        scaleY: 1
+      , @options.scoreBounce, createjs.Ease.easeIn)
+
       @currency.set
         text: currency.text
       @goal.graphics.f(currency.color).dr(0, 0, @width, 75).ef()
