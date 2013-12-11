@@ -53,9 +53,11 @@ define [ 'require'
     showGameScreen: ->
       $('body').attr 'data-show', 'game'
 
-      createjs.Ticker.setPaused false
+      @board.start()
 
     showVictoryScreen: (player) =>
+      @board.stop()
+
       $('body').attr 'data-show', 'victory'
 
       instance = createjs.Sound.play 'worldklass',

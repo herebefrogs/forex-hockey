@@ -76,6 +76,18 @@ define [ 'require'
       else if @player2.score >= @options.winningScore
         @options.winningCallback 2
 
+    start: ->
+      createjs.Ticker.setPaused false
+
+    stop: ->
+      # stop the game loop
+      createjs.Ticker.setPaused true
+
+      # free the event listeners attached to each puck
+      for puck in @pucks
+        puck.release
+          pointerID: null
+
     # main game loop
     tick: (event) =>
       if not event.paused
