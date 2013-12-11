@@ -18,6 +18,7 @@ define [ 'require'
       # initialize graphic system
       stage = new createjs.Stage 'canvas'
       createjs.Touch.enable stage
+      createjs.Ticker.setFPS 60
       createjs.Ticker.setPaused true
 
       @board = new GameBoard stage,

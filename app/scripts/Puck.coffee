@@ -11,6 +11,10 @@ define [ 'require'
       @shape.scaleX = 0
       @shape.scaleY = 0
 
+      @vel =
+        x: 0
+        y: 0
+
       @circle = new createjs.Shape()
       @text = new createjs.Text @currency, 'bold 32px "Press Start 2P"'
       @text.x = - @text.getMeasuredWidth() / 2
@@ -69,7 +73,9 @@ define [ 'require'
 
         if createjs.Ticker.getTime() - @time > @options.stationaryTime
           # stayed stationary too long
-          delete @vel
+          @vel =
+            x: 0
+            y: 0
         else
           @vel.x *= @options.releaseBoost
           @vel.y *= @options.releaseBoost
@@ -103,6 +109,33 @@ define [ 'require'
         # flip velocity vector within the board
         @vel.x = -@vel.x * @options.collisionFriction
         @vel.y *= @options.collisionFriction
+
+    checkPuckCollision: (puck) ->
+      deltaX = @shape.x - puck.shape.x
+      deltaY = @shape.y - puck.shape.y
+      distance = Math.sqrt Math.pow(deltaX, 2) + Math.pow(deltaY, 2)
+
+      if distance < 2 * @options.puckRadius
+        cos = Math.abs deltaX / distance
+        sin = Math.abs deltaY / distance
+
+        #TODO adjust position & tap coordinate
+
+        # project velocity in circles' tangent reference frame
+        x = @vel.x * cos + @vel.y * cos
+        y = - @vel.x * sin + @vel.y * cos
+
+        # flip velocity around circle's tangent axis
+        if (deltaX > 0 and deltaY > 0) or (deltaX < 0 and deltaY < 0)
+            x = - x * @options.collisionFriction
+            y *= @options.collisionFriction
+        else
+            y = - y * @options.collisionFriction
+            x *= @options.collisionFriction
+
+        # project velocity back to initial reference frame
+        @vel.x = x * cos - y * sin
+        @vel.y = x * sin + y * cos
 
     render: ->
       if not @pointerId?

@@ -99,9 +99,11 @@ define [ 'require'
           puck.updatePosition event.delta
 
         # calculate collisions and correct course
-        for puck in @pucks
-            puck.checkWallCollision @stage.canvas.width
-            # TODO pucks to pucks
+        for puck, i in @pucks
+          puck.checkWallCollision @stage.canvas.width
+
+          for otherPuck in @pucks
+            puck.checkPuckCollision otherPuck if puck isnt otherPuck
 
         # update score when pucks leave the board
         @checkGoal()
