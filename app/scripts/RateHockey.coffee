@@ -20,7 +20,15 @@ define [ 'require'
       createjs.Touch.enable stage
       createjs.Ticker.setPaused true
 
-      @board = new GameBoard stage
+      @board = new GameBoard stage,
+        debug: true
+        black: '#223'
+        # percentage of velocity loss per second
+        friction: 0.15
+        # magic velocity multiplier when releasing puck
+        releaseBoost: 2
+        # delta in ms between move and release event above which the puck lost all its velocity
+        stationaryTime: 250
 
     showGameScreen: ->
       $('body').attr 'data-show', 'game'
@@ -35,5 +43,4 @@ define [ 'require'
 
       if instance.playState is createjs.Sound.PLAY_FAILED
         console.error 'createjs.Sound failed to play mp3'
-
 
