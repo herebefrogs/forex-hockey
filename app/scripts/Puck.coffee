@@ -123,6 +123,18 @@ define [ 'require'
         x = @vel.x * cos + @vel.y * cos
         y = - @vel.x * sin + @vel.y * cos
 
+        offset = ((2 * @options.puckRadius) - distance) / 2
+        ratio = offset / distance
+        offsetX = deltaX * ratio
+        offsetY = deltaY * ratio
+
+        @shape.x += offsetX
+        @shape.y += offsetY
+
+        if @pointerId?
+          @tap.x += offsetX
+          @tap.y += offsetY
+
         # flip velocity around circle's tangent axis
         if (deltaX > 0 and deltaY > 0) or (deltaX < 0 and deltaY < 0)
             x = - x * @options.collisionFriction
