@@ -19,8 +19,7 @@ require ['jquery', 'RateHockey' ], () ->
   # sound hack for mobile: closure to have a touch event
   # in the callstack when loading/playing files through SoundJS
 
-  # TODO uncomment... bypassed to develop faster
-  #$('#splash').on 'click', ->
-  game = new RateHockey()
+  $('#splash').on 'click', ->
+    game = new RateHockey()
 
-  game.showGameScreen()
+    game.showGameScreen()
