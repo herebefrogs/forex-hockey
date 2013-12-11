@@ -25,6 +25,10 @@ define [ 'require'
         black: '#223'
         puckRadius: 75
         currencies: [ 'EUR', 'GBP', 'USD' ]
+        symbols: 
+          EUR: '€'
+          GBP: '£'
+          USD: '$'
         # percentage of velocity loss per second
         friction: 0.15
         # magic velocity multiplier when releasing puck
@@ -36,7 +40,7 @@ define [ 'require'
         # max number of puck in play at anytime
         maxPucks: 6
         # puck creation probability divider
-        probabilityDivider: 40
+        probabilityDivider: 20
         # time in ms for a puck to appear once created
         puckFadeIn: 750
 

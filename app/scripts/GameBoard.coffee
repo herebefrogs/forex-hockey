@@ -1,7 +1,10 @@
 define [ 'require'
          'EaselJS'
+         'Goal'
+         'lodash'
          'Puck' ], (require) ->
 
+  Goal = require 'Goal'
   Puck = require 'Puck'
 
   class GameBoard
@@ -10,6 +13,18 @@ define [ 'require'
       createjs.Ticker.addEventListener 'tick', @tick
 
       @pucks = []
+      # top of board
+      @player1 = new Goal @stage.canvas.width, 50, true, @options
+      # bottom of board
+      @player2 = new Goal @stage.canvas.width, @stage.canvas.height - 50, false, @options
+
+      @gameBoard = new createjs.Container()
+      @scoreBoard = new createjs.Container()
+      @scoreBoard.addChild @player1.shape
+      @scoreBoard.addChild @player2.shape
+
+      @stage.addChild @gameBoard
+      @stage.addChild @scoreBoard
 
       # give the 2 players something to start with
       @addPucks()
@@ -39,8 +54,23 @@ define [ 'require'
 
         puck = new Puck x, y, currency, @options
         @pucks.push puck
-        @stage.addChild puck.shape
+        @gameBoard.addChild puck.shape
 
+    checkGoal: ->
+      remove = []
+      for puck in @pucks
+        if puck.shape.y < - @options.puckRadius
+          @player1.add puck.currency
+          @gameBoard.removeChild puck.shape
+          remove.push puck
+        else if puck.shape.y > @stage.canvas.height + @options.puckRadius
+          @player2.add puck.currency
+          @gameBoard.removeChild puck.shape
+          remove.push puck
+
+      @pucks = _.difference @pucks, remove
+
+    # main game loop
     tick: (event) =>
       if not event.paused
         # add more pucks if needed
@@ -53,7 +83,10 @@ define [ 'require'
         # calculate collisions and correct course
         #  pucks to walls
         #  pucks to pucks
+
         # update score when pucks leave the board
+        @checkGoal()
+
         # check victory condition
 
         @stage.update()
