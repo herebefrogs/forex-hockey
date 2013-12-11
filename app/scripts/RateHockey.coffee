@@ -21,14 +21,18 @@ define [ 'require'
       createjs.Ticker.setPaused true
 
       @board = new GameBoard stage,
+        # TODO set to false for demo
         debug: true
         black: '#223'
         puckRadius: 75
         currencies: [ 'EUR', 'GBP', 'USD' ]
-        symbols: 
+        symbols:
           EUR: '€'
           GBP: '£'
           USD: '$'
+        winningCallback: @showVictoryScreen
+        # TODO set to 75 for demo
+        winningScore: 3
         # percentage of velocity loss per second
         friction: 0.15
         # magic velocity multiplier when releasing puck
@@ -49,7 +53,7 @@ define [ 'require'
 
       createjs.Ticker.setPaused false
 
-    showVictoryScreen: ->
+    showVictoryScreen: (player) =>
       $('body').attr 'data-show', 'victory'
 
       instance = createjs.Sound.play 'worldklass',

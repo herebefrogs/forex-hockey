@@ -70,6 +70,12 @@ define [ 'require'
 
       @pucks = _.difference @pucks, remove
 
+    checkVictory: ->
+      if @player1.score >= @options.winningScore
+        @options.winningCallback 1
+      else if @player2.score >= @options.winningScore
+        @options.winningCallback 2
+
     # main game loop
     tick: (event) =>
       if not event.paused
@@ -88,6 +94,7 @@ define [ 'require'
         @checkGoal()
 
         # check victory condition
+        @checkVictory()
 
         @stage.update()
 
