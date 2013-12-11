@@ -23,12 +23,22 @@ define [ 'require'
       @board = new GameBoard stage,
         debug: true
         black: '#223'
+        puckRadius: 75
+        currencies: [ 'EUR', 'GBP', 'USD' ]
         # percentage of velocity loss per second
         friction: 0.15
         # magic velocity multiplier when releasing puck
         releaseBoost: 2
         # delta in ms between move and release event above which the puck lost all its velocity
         stationaryTime: 250
+        # max distance from board centre in percentage where puck can be added
+        maxDistance: 0.10
+        # max number of puck in play at anytime
+        maxPucks: 6
+        # puck creation probability divider
+        probabilityDivider: 40
+        # time in ms for a puck to appear once created
+        puckFadeIn: 750
 
     showGameScreen: ->
       $('body').attr 'data-show', 'game'

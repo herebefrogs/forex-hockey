@@ -1,5 +1,6 @@
 define [ 'require'
-         'EaselJS' ], (require) ->
+         'EaselJS'
+         'TweenJS' ], (require) ->
 
   class Puck
 
@@ -7,6 +8,8 @@ define [ 'require'
       @shape = new createjs.Container()
       @shape.x = x
       @shape.y = y
+      @shape.scaleX = 0
+      @shape.scaleY = 0
 
       @circle = new createjs.Shape()
       @text = new createjs.Text @currency, 'bold 32px "Press Start 2P"'
@@ -18,6 +21,11 @@ define [ 'require'
       @shape.hitArea = @circle
 
       @render()
+
+      createjs.Tween.get(@shape).to(
+        scaleX: 1
+        scaleY: 1
+      , @options.puckFadeIn, createjs.Ease.elasticOut)
 
       @shape.addEventListener 'mousedown', @press
 
@@ -82,11 +90,11 @@ define [ 'require'
 
     render: ->
       if not @pointerId?
-        @circle.graphics.ss(10).s('white').f(@options.black).dc 0, 0, 75
+        @circle.graphics.ss(10).s('white').f(@options.black).dc 0, 0, @options.puckRadius
         @text.set
           color: 'white'
       else
-        @circle.graphics.f('white').dc 0, 0, 75
+        @circle.graphics.f('white').dc 0, 0, @options.puckRadius
         @text.set
           color: @options.black
 
