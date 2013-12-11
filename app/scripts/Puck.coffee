@@ -88,6 +88,22 @@ define [ 'require'
         @vel.x *= remaining
         @vel.y *= remaining
 
+    checkWallCollision: (boardWidth) ->
+      if @shape.x < @options.puckRadius
+        offset = @options.puckRadius - @shape.x
+      else if @shape.x > boardWidth - @options.puckRadius
+        offset = boardWidth - @options.puckRadius - @shape.x
+
+      if offset?
+        # move puck back within the board
+        @shape.x += offset
+        # also shift the tap coordinate if puck being moved
+        @tap.x += offset if @pointerId?
+
+        # flip velocity vector within the board
+        @vel.x = -@vel.x * @options.collisionFriction
+        @vel.y *= @options.collisionFriction
+
     render: ->
       if not @pointerId?
         @circle.graphics.ss(10).s('white').f(@options.black).dc 0, 0, @options.puckRadius

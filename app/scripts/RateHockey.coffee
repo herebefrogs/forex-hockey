@@ -33,8 +33,10 @@ define [ 'require'
         winningCallback: @showVictoryScreen
         # TODO set to 75 for demo
         winningScore: 3
-        # percentage of velocity loss per second
+        # percentage of velocity loss per second when gliding freely
         friction: 0.15
+        # percentage of velocity remaining when colliding
+        collisionFriction: 0.80
         # magic velocity multiplier when releasing puck
         releaseBoost: 2
         # delta in ms between move and release event above which the puck lost all its velocity
