@@ -14,15 +14,17 @@ define [ 'require'
 
       @pucks = []
       # top of board
-      @player1 = new Goal @stage.canvas.width, 50, true, @options
+      @player1 = new Goal @stage.canvas.width, 0, true, @options
       # bottom of board
-      @player2 = new Goal @stage.canvas.width, @stage.canvas.height - 50, false, @options
+      @player2 = new Goal @stage.canvas.width, @stage.canvas.height, false, @options
 
       @gameBoard = new createjs.Container()
       @scoreBoard = new createjs.Container()
       @scoreBoard.addChild @player1.shape
       @scoreBoard.addChild @player2.shape
 
+      @stage.addChild @player1.goal
+      @stage.addChild @player2.goal
       @stage.addChild @gameBoard
       @stage.addChild @scoreBoard
 
@@ -59,14 +61,16 @@ define [ 'require'
     checkGoal: ->
       remove = []
       for puck in @pucks
-        if puck.shape.y < - @options.puckRadius
+        if puck.shape.y < - @options.puckRadius * 0.75
           @player1.add puck.currency
           @gameBoard.removeChild puck.shape
           remove.push puck
-        else if puck.shape.y > @stage.canvas.height + @options.puckRadius
+          puck.reset()
+        else if puck.shape.y > @stage.canvas.height + @options.puckRadius * 0.75
           @player2.add puck.currency
           @gameBoard.removeChild puck.shape
           remove.push puck
+          puck.reset()
 
       @pucks = _.difference @pucks, remove
 
@@ -85,8 +89,7 @@ define [ 'require'
 
       # free the event listeners attached to each puck
       for puck in @pucks
-        puck.release
-          pointerID: null
+        puck.reset()
 
     # main game loop
     tick: (event) =>

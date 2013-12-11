@@ -4,11 +4,12 @@ define [ 'require'
 
   class Goal
 
-    constructor: (width, height, flipped, @options) ->
+    constructor: (@width, @height, flipped, @options) ->
       @currencies = []
       @score = 0
 
       @shape = new createjs.Container()
+      @goal = new createjs.Shape()
       @millions = new createjs.Text @getScore(), 'bold 32px "Press Start 2P"', 'white'
       @currency = new createjs.Text "", 'bold 32px "Press Start 2P"', 'white'
 
@@ -17,12 +18,17 @@ define [ 'require'
         @millions.x = width - 50
         @currency.rotation = 180
         @currency.x = 150
+        @millions.y = height + 50
+        @currency.y = height + 50
+        @goal.x = 0
+        @goal.y = 0
       else
         @millions.x = 50
         @currency.x = width - 150
-
-      @millions.y = height
-      @currency.y = height
+        @millions.y = height - 50
+        @currency.y = height - 50
+        @goal.x = 0
+        @goal.y = height - 75
 
       @shape.addChild @millions
       @shape.addChild @currency
@@ -47,11 +53,12 @@ define [ 'require'
       @millions.set
         text: @getScore currency
       @currency.set
-        text: currency
+        text: currency.text
+      @goal.graphics.f(currency.color).dr(0, 0, @width, 75).ef()
 
     getScore: (currency) ->
-      score = @options.symbols[currency] or '' 
+      score = currency?.symbol or ''
 
       score += "#{@score}M"
 
-      
+

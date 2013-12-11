@@ -16,7 +16,7 @@ define [ 'require'
         y: 0
 
       @circle = new createjs.Shape()
-      @text = new createjs.Text @currency, 'bold 32px "Press Start 2P"'
+      @text = new createjs.Text @currency.text, 'bold 32px "Press Start 2P"'
       @text.x = - @text.getMeasuredWidth() / 2
       @text.y = - @text.getMeasuredLineHeight() / 3
 
@@ -119,8 +119,6 @@ define [ 'require'
         cos = Math.abs deltaX / distance
         sin = Math.abs deltaY / distance
 
-        #TODO adjust position & tap coordinate
-
         # project velocity in circles' tangent reference frame
         x = @vel.x * cos + @vel.y * cos
         y = - @vel.x * sin + @vel.y * cos
@@ -137,15 +135,20 @@ define [ 'require'
         @vel.x = x * cos - y * sin
         @vel.y = x * sin + y * cos
 
+    reset: ->
+      @release
+        pointerID: null
+
     render: ->
       if not @pointerId?
-        @circle.graphics.ss(10).s('white').f(@options.black).dc 0, 0, @options.puckRadius
+        @circle.graphics.ss(2 * @options.puckBorder).s('white').f(@currency.color).dc(0, 0, @options.puckRadius - @options.puckBorder).es().ef()
         @text.set
           color: 'white'
       else
-        @circle.graphics.f('white').dc 0, 0, @options.puckRadius
+        @circle.graphics.f('white').dc(0, 0, @options.puckRadius).ef()
         @text.set
-          color: @options.black
+          color: @currency.color
+
 
       if @options.debug
         @circle.graphics.ef().ss(4).s('red').mt(0, 0).lt(@vel.x, @vel.y) if @vel?

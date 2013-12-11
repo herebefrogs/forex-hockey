@@ -22,18 +22,26 @@ define [ 'require'
       createjs.Ticker.setPaused true
 
       @board = new GameBoard stage,
-        # TODO set to false for demo
-        debug: true
+        debug: false
         black: '#223'
-        puckRadius: 75
-        currencies: [ 'EUR', 'GBP', 'USD' ]
-        symbols:
-          EUR: '€'
-          GBP: '£'
-          USD: '$'
+        puckRadius: 85
+        puckBorder: 5
+        currencies: [ {
+           text: 'EUR'
+           symbol: '€'
+           color: '#2b2'
+          }, {
+            text: 'GBP'
+            symbol: '£'
+            color: '#b22'
+          }, {
+            text: 'USD'
+            symbol: '$'
+            color: '#22b'
+          }
+        ]
         winningCallback: @showVictoryScreen
-        # TODO set to 75 for demo
-        winningScore: 3
+        winningScore: 75
         # percentage of velocity loss per second when gliding freely
         friction: 0.15
         # percentage of velocity remaining when colliding
