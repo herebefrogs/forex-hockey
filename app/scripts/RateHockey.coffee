@@ -63,11 +63,16 @@ define [ 'require'
 
 
     showGameScreen: ->
+      ga 'send', 'pageview', '/rate-hockey/game'
+
       $('body').attr 'data-show', 'game'
 
       @board.start()
 
-    showVictoryScreen: (player) =>
+    showVictoryScreen: (player, score) =>
+      ga 'send', 'pageview', '/rate-hockey/victory'
+      ga 'send', 'event', 'game', "victory:player #{player}", "score:#{score}"
+
       @board.stop()
 
       $('body').attr 'data-show', 'victory'

@@ -63,11 +63,13 @@ define [ 'require'
       for puck in @pucks
         if puck.shape.y < - @options.puckRadius * 0.75
           @player1.add puck.currency
+          ga 'send', 'event', 'game', 'goal:player 1', "score:#{@player1.score}"
           @gameBoard.removeChild puck.shape
           remove.push puck
           puck.reset()
         else if puck.shape.y > @stage.canvas.height + @options.puckRadius * 0.75
           @player2.add puck.currency
+          ga 'send', 'event', 'game', 'goal:player 2', "score:#{@player2.score}"
           @gameBoard.removeChild puck.shape
           remove.push puck
           puck.reset()
@@ -76,9 +78,9 @@ define [ 'require'
 
     checkVictory: ->
       if @player1.score >= @options.winningScore
-        @options.winningCallback 1
+        @options.winningCallback 1, @player1.score
       else if @player2.score >= @options.winningScore
-        @options.winningCallback 2
+        @options.winningCallback 2, @player2.score
 
     start: ->
       createjs.Ticker.setPaused false
