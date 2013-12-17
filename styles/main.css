@@ -1,7 +1,6 @@
 body {
   font-family: "Press Start 2P", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-
   background: #223;
   color: #fafafa;
   margin: 0;
@@ -14,13 +13,15 @@ body {
   display: none;
 }
 
+#splash {
+  cursor: pointer;
+  text-align: center;
+}
+
 .jumbotron {
   position: absolute;
-  top: 50%;
-  bottom: 50%;
-  margin-top: -25%;
-
-  text-align: center;
+  top: 25%;
+  width: 100%;
 }
 
 .jumbotron img {
@@ -28,16 +29,13 @@ body {
 }
 
 .jumbotron div {
-  display: inline-block;
   margin: 25px 0;
 }
 
 .footer {
   position: absolute;
   bottom: 5%;
-
   width: 100%;
-  text-align: center;
 }
 
 #game canvas {
@@ -61,7 +59,9 @@ body {
   -webkit-transform-origin: 0 0;
   -webkit-transform: skewY(-30deg) scaleY(3);
 }
+
 /* screen transitions */
+
 body[data-show=splash] #splash {
   display: block;
 }

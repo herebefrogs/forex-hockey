@@ -62,6 +62,7 @@
         ga('send', 'pageview', '/rate-hockey/victory');
         ga('send', 'event', 'game', "victory:player " + player, "score:" + score);
         this.board.stop();
+        $('#playerId').text(player);
         $('body').attr('data-show', 'victory');
         instance = createjs.Sound.play('worldklass', {
           volume: 1
