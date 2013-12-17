@@ -5,11 +5,11 @@ require.config
       exports: 'createjs'
 
   paths:
-    EaselJS: '../bower_components/EaselJS/lib/easeljs-0.7.0.min'
+    EaselJS: '../bower_components/EaselJS/lib/easeljs-0.7.1.min'
     jquery: '../bower_components/jquery/jquery.min'
     lodash: '../bower_components/lodash/dist/lodash.min'
-    SoundJS: '../bower_components/SoundJS/lib/soundjs-0.5.1.min'
-    TweenJS: '../bower_components/TweenJS/lib/tweenjs-0.5.0.min'
+    SoundJS: '../bower_components/SoundJS/lib/soundjs-0.5.2.min'
+    TweenJS: '../bower_components/TweenJS/lib/tweenjs-0.5.1.min'
 
 require ['jquery', 'RateHockey' ], () ->
   'use strict'
