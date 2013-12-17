@@ -75,6 +75,7 @@ define [ 'require'
 
       @board.stop()
 
+      $('#playerId').text player
       $('body').attr 'data-show', 'victory'
 
       instance = createjs.Sound.play 'worldklass',
