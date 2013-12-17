@@ -14,13 +14,15 @@ body {
   display: none;
 }
 
+#splash {
+  cursor: pointer;
+  text-align: center;
+}
+
 .jumbotron {
   position: absolute;
-  top: 50%;
-  bottom: 50%;
-  margin-top: -25%;
-
-  text-align: center;
+  top: 25%;
+  width: 100%;
 }
 
 .jumbotron img {
@@ -28,16 +30,13 @@ body {
 }
 
 .jumbotron div {
-  display: inline-block;
   margin: 25px 0;
 }
 
 .footer {
   position: absolute;
   bottom: 5%;
-
   width: 100%;
-  text-align: center;
 }
 
 #game canvas {
