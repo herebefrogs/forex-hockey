@@ -181,9 +181,11 @@ module.exports = function (grunt) {
         // not enabled since usemin task does concat and uglify
         // check index.html to edit your build targets
         // enable this task if you prefer defining your build targets here
-        /*uglify: {
+        /*
+        uglify: {
             dist: {}
-        },*/
+        },
+        */
         'bower-install': {
             app: {
                 html: '<%= yeoman.app %>/index.html',
@@ -202,11 +204,43 @@ module.exports = function (grunt) {
                 }
             }
         },
+        replace: {
+            dist: {
+                src: ['<%= yeoman.app %>/index.html'],
+                dest: ['.tmp/index.html'],
+                replacements: [{
+                    from: /data-main="(.*)" src="bower_components\/requirejs\/require.js"/,
+                    to: 'src="$1"'
+                }]
+            }
+        },
         useminPrepare: {
             options: {
-                dest: '<%= yeoman.dist %>'
+                dest: '<%= yeoman.dist %>',
+                flow: {
+                    html: {
+                        steps: {
+                            'js': [ 'requirejs' ],
+                            'css': [ 'concat', 'cssmin' ]
+                        },
+                        post: {}
+                    }
+                }
             },
-            html: '<%= yeoman.app %>/index.html'
+            html: '.tmp/index.html'
+        },
+        requirejs: {
+            options: {
+                baseUrl: '.tmp/scripts',
+                mainConfigFile: '.tmp/scripts/main.js',
+                deps: ['main'],
+                insertRequire: ['main'],
+                name: '../bower_components/almond/almond',
+                out: 'dist/scripts/main.js',
+                optimize: 'uglify2',
+                generateSourceMaps: true,
+                preserveLicenseComments: false
+            }
         },
         usemin: {
             options: {
@@ -266,7 +300,7 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: '<%= yeoman.app %>',
+                    cwd: '.tmp',
                     src: '*.html',
                     dest: '<%= yeoman.dist %>'
                 }]
@@ -294,6 +328,14 @@ module.exports = function (grunt) {
                 cwd: '<%= yeoman.app %>/styles',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
+            },
+            // move JS libraries from app to .tmp so requirejs can find them
+            bower: {
+                expand: true,
+                dot: true,
+                cwd: '<%= yeoman.app %>/bower_components',
+                dest: '.tmp/bower_components/',
+                src: '**/*.js'
             }
         },
         concurrent: {
@@ -310,6 +352,7 @@ module.exports = function (grunt) {
                 'coffee',
                 'compass',
                 'copy:styles',
+                'copy:bower',
                 'imagemin',
                 'svgmin',
                 'htmlmin'
@@ -332,8 +375,8 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('server', function () {
-      grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-      grunt.task.run(['serve']);
+        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
+        grunt.task.run(['serve']);
     });
 
     grunt.registerTask('test', [
@@ -346,12 +389,13 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
+        'replace',
         'useminPrepare',
         'concurrent:dist',
         'autoprefixer',
         'concat',
         'cssmin',
-        'uglify',
+        'requirejs',
         'copy:dist',
         'rev',
         'usemin'
