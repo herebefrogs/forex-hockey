@@ -17,8 +17,10 @@ define [ 'require'
 
       @circle = new createjs.Shape()
       @text = new createjs.Text @currency.text, 'bold 32px "Press Start 2P"'
-      @text.x = - @text.getMeasuredWidth() / 2
-      @text.y = - @text.getMeasuredLineHeight() / 3
+      # apply random rotation around center of text
+      @text.rotation = 359 * Math.random()
+      @text.regX = @text.getMeasuredWidth() / 2
+      @text.regY = @text.getMeasuredLineHeight() / 3
 
       @shape.addChild @circle
       @shape.addChild @text
