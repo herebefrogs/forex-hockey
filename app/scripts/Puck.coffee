@@ -149,7 +149,7 @@ define [ 'require'
         @vel.x = x * cos - y * sin
         @vel.y = x * sin + y * cos
 
-    reset: ->
+    free: ->
       @release
         pointerID: null
 

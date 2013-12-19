@@ -61,18 +61,22 @@ define [ 'require'
     checkGoal: ->
       remove = []
       for puck in @pucks
-        if puck.shape.y < - @options.puckRadius * 0.75
+        if puck.shape.y < 0
           @player1.add puck.currency
           ga 'send', 'event', 'game', 'goal:player 1', "score:#{@player1.score}"
-          @gameBoard.removeChild puck.shape
           remove.push puck
-          puck.reset()
-        else if puck.shape.y > @stage.canvas.height + @options.puckRadius * 0.75
+        else if puck.shape.y > @stage.canvas.height
           @player2.add puck.currency
           ga 'send', 'event', 'game', 'goal:player 2', "score:#{@player2.score}"
-          @gameBoard.removeChild puck.shape
           remove.push puck
-          puck.reset()
+
+      for puck in remove
+        puck.free()
+        createjs.Tween.get(puck.shape).to(
+          scaleX: 0
+          scaleY: 0
+        , @options.puckFadeIn, createjs.Ease.circOut).call =>
+          @gameBoard.removeChild puck.shape
 
       @pucks = _.difference @pucks, remove
 
@@ -91,7 +95,7 @@ define [ 'require'
 
       # free the event listeners attached to each puck
       for puck in @pucks
-        puck.reset()
+        puck.free()
 
     # main game loop
     tick: (event) =>
