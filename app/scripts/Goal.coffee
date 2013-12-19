@@ -10,30 +10,31 @@ define [ 'require'
 
       @shape = new createjs.Container()
       @goal = new createjs.Shape()
-      @millions = new createjs.Text @getScore(), 'bold 32px "Press Start 2P"', 'white'
+      @scoreText = new createjs.Text @getScore(), 'bold 32px "Press Start 2P"', 'white'
       @currency = new createjs.Text "", 'bold 32px "Press Start 2P"', 'white'
 
-      @millions.regX = @millions.getMeasuredWidth() / 2
-      @millions.regY = @millions.getMeasuredHeight() / 2
+      @scoreText.regX = @scoreText.getMeasuredWidth() / 2
+      @scoreText.regY = @scoreText.getMeasuredLineHeight()
+      @currency.regY = @scoreText.regY
+
+      @scoreText.x = 50 + @scoreText.regX
+      @scoreText.y = 16.25 + @scoreText.regY
+      @currency.x = width - 150
+      @currency.y = @scoreText.y
+      @shape.regX = @width / 2
+      @shape.regY = 32.5
+      @shape.x = @shape.regX
+      @goal.x = 0
 
       if flipped
-        @millions.rotation = 180
-        @millions.x = width - 50 - @millions.regX
-        @currency.rotation = 180
-        @currency.x = 150
-        @millions.y = height + 50 - @millions.regY
-        @currency.y = height + 50
-        @goal.x = 0
+        @shape.rotation = 180
+        @shape.y = @shape.regY
         @goal.y = 0
       else
-        @millions.x = 50 + @millions.regX
-        @currency.x = width - 150
-        @millions.y = height - 50 + @millions.regY
-        @currency.y = height - 50
-        @goal.x = 0
+        @shape.y = height - @shape.regY
         @goal.y = height - 75
 
-      @shape.addChild @millions
+      @shape.addChild @scoreText
       @shape.addChild @currency
 
 
@@ -54,9 +55,9 @@ define [ 'require'
       @currencies.push currency
 
       if @score > previousScore
-        @millions.set
+        @scoreText.set
           text: @getScore currency
-        createjs.Tween.get(@millions).to(
+        createjs.Tween.get(@scoreText).to(
           scaleX: 2
           scaleY: 2
         , @options.scoreBounce, createjs.Ease.easeOut).to(
