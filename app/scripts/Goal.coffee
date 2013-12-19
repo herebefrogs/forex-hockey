@@ -11,15 +11,18 @@ define [ 'require'
       @shape = new createjs.Container()
       @goal = new createjs.Shape()
       @scoreText = new createjs.Text @getScore(), 'bold 32px "Press Start 2P"', 'white'
-      @currency = new createjs.Text "", 'bold 32px "Press Start 2P"', 'white'
+      @valueText = new createjs.Text "  ", 'bold 32px "Press Start 2P"', 'white'
+      @currency = new createjs.Text "   ", 'bold 32px "Press Start 2P"', 'white'
 
+      @updateCurrencyAndValueX()
       @scoreText.regX = @scoreText.getMeasuredWidth() / 2
       @scoreText.regY = @scoreText.getMeasuredLineHeight()
+      @valueText.regY = @scoreText.regY
       @currency.regY = @scoreText.regY
 
       @scoreText.x = 50 + @scoreText.regX
       @scoreText.y = 16.25 + @scoreText.regY
-      @currency.x = width - 150
+      @valueText.y = @scoreText.y
       @currency.y = @scoreText.y
       @shape.regX = @width / 2
       @shape.regY = 32.5
@@ -35,6 +38,7 @@ define [ 'require'
         @goal.y = height - 75
 
       @shape.addChild @scoreText
+      @shape.addChild @valueText
       @shape.addChild @currency
 
 
@@ -57,17 +61,32 @@ define [ 'require'
       if @score > previousScore
         @scoreText.set
           text: @getScore currency
-        createjs.Tween.get(@scoreText).to(
-          scaleX: 2
-          scaleY: 2
-        , @options.scoreBounce, createjs.Ease.easeOut).to(
-          scaleX: 1
-          scaleY: 1
-        , @options.scoreBounce, createjs.Ease.easeIn)
+        @animate @scoreText
 
+      # show the value of the next puck to go
+      @valueText.set
+        text: "X#{2*@puckValue or 1}"
       @currency.set
         text: currency.text
+
+      @updateCurrencyAndValueX()
+      @animate @valueText
+
       @goal.graphics.f(currency.color).dr(0, 0, @width, 75).ef()
+
+    updateCurrencyAndValueX: ->
+      @valueText.regX = @valueText.getMeasuredWidth() / 2
+      @valueText.x = @width - 50 - @valueText.regX
+      @currency.x = @valueText.x - @valueText.regX - 25 - @currency.getMeasuredWidth()
+
+    animate: (text) ->
+      createjs.Tween.get(text).to(
+        scaleX: 2
+        scaleY: 2
+      , @options.scoreBounce, createjs.Ease.easeOut).to(
+        scaleX: 1
+        scaleY: 1
+      , @options.scoreBounce, createjs.Ease.easeIn)
 
     getScore: (currency) ->
       score = currency?.symbol or ''
