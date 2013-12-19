@@ -49,19 +49,20 @@ define [ 'require'
         # 1st currency of a new streak
         @puckValue = 0
 
+      previousScore = @score
       @score += @puckValue
       @currencies.push currency
 
-      # TODO eye candy, make the million board wiggle with a tween
-      @millions.set
-        text: @getScore currency
-      createjs.Tween.get(@millions).to(
-        scaleX: 2
-        scaleY: 2
-      , @options.scoreBounce, createjs.Ease.easeOut).to(
-        scaleX: 1
-        scaleY: 1
-      , @options.scoreBounce, createjs.Ease.easeIn)
+      if @score > previousScore
+        @millions.set
+          text: @getScore currency
+        createjs.Tween.get(@millions).to(
+          scaleX: 2
+          scaleY: 2
+        , @options.scoreBounce, createjs.Ease.easeOut).to(
+          scaleX: 1
+          scaleY: 1
+        , @options.scoreBounce, createjs.Ease.easeIn)
 
       @currency.set
         text: currency.text
