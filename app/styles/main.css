@@ -12,11 +12,11 @@ body {
   width: 100%;
   height: 100%;
   display: none;
+  text-align: center;
 }
 
 #splash {
   cursor: pointer;
-  text-align: center;
 }
 
 .jumbotron {
@@ -43,23 +43,19 @@ body {
   border: solid 1px white;
 }
 
-#victory .left {
-  position: absolute;
-  top: 69%;
-  left: 3%;
-  font-size: 2em;
-  -webkit-transform-origin: 0 0;
-  -webkit-transform: skewY(30deg) scaleY(3);
+#victory img {
+  max-width: 100%;
 }
 
-#victory .right {
+.congratulations {
   position: absolute;
-  top: 89%;
-  left: 53%;
-  font-size: 2em;
-  -webkit-transform-origin: 0 0;
-  -webkit-transform: skewY(-30deg) scaleY(3);
+  top: 65%;
+  width: 100%;
+  font-size: 1.8em;
+  -webkit-transform: scaleY(3);
+  color: black;
 }
+
 /* screen transitions */
 body[data-show=splash] #splash {
   display: block;
