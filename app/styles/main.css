@@ -53,7 +53,16 @@ body {
   width: 100%;
   font-size: 1.8em;
   -webkit-transform: scaleY(3);
-  color: black;
+  -webkit-animation: blink 0.25s steps(1) 0 infinite;
+}
+
+@-webkit-keyframes blink {
+  0% {
+    color: black;
+  }
+  50% {
+    color: #b1d236;
+  }
 }
 
 /* screen transitions */
