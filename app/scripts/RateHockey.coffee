@@ -76,6 +76,7 @@ define [ 'require'
       @board.stop()
 
       $('#playerId').text player
+      $('#victory').addClass 'flipped' if player is 1
       $('body').attr 'data-show', 'victory'
 
       instance = createjs.Sound.play 'worldklass',
