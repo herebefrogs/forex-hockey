@@ -149,9 +149,18 @@ define [ 'require'
         @vel.x = x * cos - y * sin
         @vel.y = x * sin + y * cos
 
-    free: ->
-      @release
-        pointerID: null
+    destroy: (callback) ->
+      @shape.removeEventListener 'pressmove', @move
+      @shape.removeEventListener 'pressup', @release
+
+      delete @pointerId
+      @render()
+
+      createjs.Tween.get(@shape).to(
+        scaleX: 0
+        scaleY: 0
+      , @options.puckFadeIn, createjs.Ease.circOut).call ->
+        callback() if callback?
 
     render: ->
       if not @pointerId?

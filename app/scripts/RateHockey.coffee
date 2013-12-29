@@ -69,14 +69,14 @@ define [ 'require'
 
       @board.start()
 
-    showVictoryScreen: (player, score) =>
+    showVictoryScreen: (winner) =>
       ga 'send', 'pageview', '/rate-hockey/victory'
-      ga 'send', 'event', 'game', "victory:player #{player}", "score:#{score}"
+      ga 'send', 'event', 'game', "victory:player #{winner.id}", "score:#{winner.score}"
 
       @board.stop()
 
-      $('#playerId').text player
-      $('#victory').addClass 'flipped' if player is 1
+      $('#playerId').text winner.id
+      $('#victory').addClass 'flipped' if winner.id is 1
       $('body').attr 'data-show', 'victory'
 
       instance = createjs.Sound.play 'worldklass',

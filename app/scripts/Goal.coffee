@@ -4,7 +4,7 @@ define [ 'require'
 
   class Goal
 
-    constructor: (@width, @height, flipped, @options) ->
+    constructor: (@id, @width, @height, flipped, @options) ->
       @currencies = []
       @score = 0
 
@@ -55,7 +55,7 @@ define [ 'require'
         @puckValue = 0
 
       previousScore = @score
-      @score += @puckValue
+      @score = Math.min @score + @puckValue, @options.winningScore
       @currencies.push currency
 
       if @score > previousScore

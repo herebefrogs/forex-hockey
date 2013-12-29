@@ -14,9 +14,9 @@ define [ 'require'
 
       @pucks = []
       # top of board
-      @player1 = new Goal @stage.canvas.width, 0, true, @options
+      @player1 = new Goal 1, @stage.canvas.width, 0, true, @options
       # bottom of board
-      @player2 = new Goal @stage.canvas.width, @stage.canvas.height, false, @options
+      @player2 = new Goal 2, @stage.canvas.width, @stage.canvas.height, false, @options
 
       @gameBoard = new createjs.Container()
       @scoreBoard = new createjs.Container()
@@ -71,54 +71,66 @@ define [ 'require'
           remove.push puck
 
       for puck in remove
-        puck.free()
-        createjs.Tween.get(puck.shape).to(
-          scaleX: 0
-          scaleY: 0
-        , @options.puckFadeIn, createjs.Ease.circOut).call =>
+        puck.destroy =>
           @gameBoard.removeChild puck.shape
 
       @pucks = _.difference @pucks, remove
 
     checkVictory: ->
       if @player1.score >= @options.winningScore
-        @options.winningCallback 1, @player1.score
+        winner = @player1
       else if @player2.score >= @options.winningScore
-        @options.winningCallback 2, @player2.score
+        winner = @player2
+
+      if winner?
+        @gameOver = true
+
+        for puck in @pucks
+          puck.destroy =>
+            @gameBoard.removeChild puck.shape
+
+        heightOffset = if winner.flipped then -4 else 4
+
+        createjs.Tween.get(winner.scoreText, { override: true }).to(
+          scaleX: 4
+          scaleY: 4
+          x: @stage.canvas.width / 2 - winner.scoreText.getMeasuredWidth() / 2
+          y: -@stage.canvas.height / 2 + heightOffset * winner.scoreText.getMeasuredLineHeight()
+        , 1000, createjs.Ease.easeOut)
+        .wait(1000)
+        .call =>
+          @options.winningCallback winner
 
     start: ->
+      @gameOver = false
       createjs.Ticker.setPaused false
 
     stop: ->
-      # stop the game loop
       createjs.Ticker.setPaused true
-
-      # free the event listeners attached to each puck
-      for puck in @pucks
-        puck.free()
 
     # main game loop
     tick: (event) =>
       if not event.paused
-        # add more pucks if needed
-        @checkRates()
+        if not @gameOver
+          # add more pucks if needed
+          @checkRates()
 
-        # update pucks positions based on velocity
-        for puck in @pucks
-          puck.updatePosition event.delta
+          # update pucks positions based on velocity
+          for puck in @pucks
+            puck.updatePosition event.delta
 
-        # calculate collisions and correct course
-        for puck, i in @pucks
-          puck.checkWallCollision @stage.canvas.width
+          # calculate collisions and correct course
+          for puck, i in @pucks
+            puck.checkWallCollision @stage.canvas.width
 
-          for otherPuck in @pucks
-            puck.checkPuckCollision otherPuck if puck isnt otherPuck
+            for otherPuck in @pucks
+              puck.checkPuckCollision otherPuck if puck isnt otherPuck
 
-        # update score when pucks leave the board
-        @checkGoal()
+          # update score when pucks leave the board
+          @checkGoal()
 
-        # check victory condition
-        @checkVictory()
+          # check victory condition
+          @checkVictory()
 
         @stage.update()
 
