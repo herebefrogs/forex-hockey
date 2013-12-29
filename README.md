@@ -1,7 +1,7 @@
 Rate Hockey
 ===========
 
-A 2-player, multitouch game mashup of Air Hockey, Hungry Hungry Hippos and OANDA Forex rates where the winning player is congratulated by OANDA CEO K Duker in person. Best enjoyed on iPad. Initially developed in 24 hours during OANDA's December 2013 hackathon.
+A 2-player, multitouch game mashup of Air Hockey, Hungry Hungry Hippos and OANDA Forex rates where the winning player is congratulated by former OANDA CEO K Duker in person. Best enjoyed on iPad. Initially developed in 24 hours during OANDA's December 2013 hackathon.
 
 It is a HTML5 reimplementation of Michael Brough's [O](http://mightyvision.blogspot.co.uk/2012/10/o.html). However instead of being random, the apparition of pucks onto the playfield is driven by the Forex market and prices of 3 currency pairs on the OANDA online Forex trading platform.
 
@@ -12,7 +12,7 @@ Game Rules
 
 The goal of Rate Hockey is to be the first to score 75 millions. Each player seats on a side of a tablet positioned in portrait mode. The top of the screen is the goal line of player #1, the bottom of the screen the one of player #2.
 
-Pucks bearing one of the three currencies EUR (euro), USD (US dollar) and GBP (British Pound Sterling) appear at the center of the screen every time there is a new price for one of the three currency pairs EUR/USD, GBP/USD and GBP/EUR on the OANDA online Forex trading platform.
+Pucks bearing one of the three currencies EUR (Euro), USD (US Dollar) and GBP (British Pound Sterling) appear at the center of the screen every time there is a new price for one of the three currency pairs EUR/USD, GBP/USD and GBP/EUR on the OANDA online Forex trading platform.
 
 You score millions by sending pucks bearing the same currency through your goal line. The first puck is worth 0 million, the second 1 million and any puck after that twice as much as the previous puck. The longer the streak, the faster you will get to 75 millions.
 
