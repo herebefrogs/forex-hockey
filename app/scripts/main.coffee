@@ -16,10 +16,14 @@ require ['jquery', 'RateHockey' ], () ->
 
   RateHockey = require 'RateHockey'
 
+  setTimeout ( ->
+    RateHockey.prototype.showStartScreen()
+  ), 3000
+
   # sound hack for mobile: closure to have a touch event
   # in the callstack when loading/playing files through SoundJS
 
-  $('#splash').on 'click', ->
+  $('#start button').on 'click', ->
     game = new RateHockey()
 
     game.showGameScreen()

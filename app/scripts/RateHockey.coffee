@@ -61,6 +61,10 @@ define [ 'require'
         # time in ms for score animation when a goal is scored
         scoreBounce: 250
 
+    showStartScreen: ->
+      ga 'send', 'pageview', '/rate-hockey/start'
+
+      $('body').attr 'data-show', 'start'
 
     showGameScreen: ->
       ga 'send', 'pageview', '/rate-hockey/game'
@@ -84,4 +88,6 @@ define [ 'require'
 
       if instance.playState is createjs.Sound.PLAY_FAILED
         console.error 'createjs.Sound failed to play mp3'
+
+      setTimeout ( => @showStartScreen() ), 5000
 
