@@ -13,7 +13,8 @@ define [ 'require'
         console.error 'createjs.Sound failed to initialize'
         return
 
-      createjs.Sound.registerSound 'sounds/worldklass.mp3', 'worldklass'
+      soundFile = $('#victory').data 'audio'
+      createjs.Sound.registerSound soundFile, 'worldklass'
 
       # initialize graphic system
       stage = new createjs.Stage 'canvas'
