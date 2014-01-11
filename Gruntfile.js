@@ -181,11 +181,9 @@ module.exports = function (grunt) {
         // not enabled since usemin task does concat and uglify
         // check index.html to edit your build targets
         // enable this task if you prefer defining your build targets here
-        /*
-        uglify: {
+        /*uglify: {
             dist: {}
-        },
-        */
+        },*/
         'bower-install': {
             app: {
                 html: '<%= yeoman.app %>/index.html',
@@ -221,7 +219,7 @@ module.exports = function (grunt) {
                 flow: {
                     html: {
                         steps: {
-                            'js': [ 'requirejs' ],
+                            'js': [ 'concat', 'requirejs' ],
                             'css': [ 'concat', 'cssmin' ]
                         },
                         post: {}
@@ -234,12 +232,19 @@ module.exports = function (grunt) {
             options: {
                 baseUrl: '.tmp/scripts',
                 mainConfigFile: '.tmp/scripts/main.js',
-                deps: ['main'],
+                include: ['main'],
+                stubModules: [
+                  'jquery',
+                  'lodash',
+                  'EaselJS',
+                  'TweenJS',
+                  'SoundJS'
+                ],
                 insertRequire: ['main'],
                 name: '../bower_components/almond/almond',
                 out: 'dist/scripts/main.js',
                 optimize: 'uglify2',
-                generateSourceMaps: true,
+                generateSourceMaps: false,
                 preserveLicenseComments: false
             }
         },
@@ -322,6 +327,12 @@ module.exports = function (grunt) {
                         'sounds/{,*/}*.mp3',
                         'styles/fonts/{,*/}*.*'
                     ]
+                }, {
+                    expand: true,
+                    dot: true,
+                    cwd: '.tmp/concat/',
+                    dest: '<%= yeoman.dist %>',
+                    src: ['scripts/vendors.js']
                 }]
             },
             styles: {
