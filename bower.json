@@ -4,7 +4,6 @@
   "dependencies": {
     "EaselJS": "*",
     "jquery": "~1.10.2",
-    "lodash": "2.4.1",
     "SoundJS": "*",
     "TweenJS": "*",
     "almond": "~0.2.7"

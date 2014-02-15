@@ -235,7 +235,6 @@ module.exports = function (grunt) {
                 include: ['main'],
                 stubModules: [
                   'jquery',
-                  'lodash',
                   'EaselJS',
                   'TweenJS',
                   'SoundJS'

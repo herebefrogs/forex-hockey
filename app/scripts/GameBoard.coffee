@@ -1,7 +1,6 @@
 define [ 'require'
          'EaselJS'
          'Goal'
-         'lodash'
          'Puck' ], (require) ->
 
   Goal = require 'Goal'
@@ -74,7 +73,7 @@ define [ 'require'
         puck.destroy =>
           @gameBoard.removeChild puck.shape
 
-      @pucks = _.difference @pucks, remove
+        @pucks.splice @pucks.indexOf(puck), 1
 
     checkVictory: ->
       if @player1.score >= @options.winningScore
