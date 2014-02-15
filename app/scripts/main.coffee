@@ -6,11 +6,10 @@ require.config
 
   paths:
     EaselJS: '../bower_components/EaselJS/lib/easeljs-0.7.1.min'
-    jquery: '../bower_components/jquery/jquery.min'
     SoundJS: '../bower_components/SoundJS/lib/soundjs-0.5.2.min'
     TweenJS: '../bower_components/TweenJS/lib/tweenjs-0.5.1.min'
 
-require ['jquery', 'RateHockey' ], () ->
+require [ 'RateHockey' ], () ->
   'use strict'
 
   RateHockey = require 'RateHockey'
@@ -22,7 +21,7 @@ require ['jquery', 'RateHockey' ], () ->
   # sound hack for mobile: closure to have a touch event
   # in the callstack when loading/playing files through SoundJS
 
-  $('#start button').on 'click', ->
+  document.getElementById('start').getElementsByTagName('button')[0].onclick = ->
     game = new RateHockey()
 
     game.showGameScreen()

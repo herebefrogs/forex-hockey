@@ -234,7 +234,6 @@ module.exports = function (grunt) {
                 mainConfigFile: '.tmp/scripts/main.js',
                 include: ['main'],
                 stubModules: [
-                  'jquery',
                   'EaselJS',
                   'TweenJS',
                   'SoundJS'

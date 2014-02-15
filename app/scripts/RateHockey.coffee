@@ -13,7 +13,7 @@ define [ 'require'
         console.error 'createjs.Sound failed to initialize'
         return
 
-      soundFile = $('#victory').data 'audio'
+      soundFile = document.getElementById('victory').dataset.audio
       createjs.Sound.registerSound soundFile, 'worldklass'
 
       # initialize graphic system
@@ -65,12 +65,12 @@ define [ 'require'
     showStartScreen: ->
       ga 'send', 'pageview', '/rate-hockey/start'
 
-      $('body').attr 'data-show', 'start'
+      document.body.dataset.show = 'start'
 
     showGameScreen: ->
       ga 'send', 'pageview', '/rate-hockey/game'
 
-      $('body').attr 'data-show', 'game'
+      document.body.dataset.show = 'game'
 
       @board.start()
 
@@ -80,9 +80,9 @@ define [ 'require'
 
       @board.stop()
 
-      $('#playerId').text winner.id
-      $('#victory').addClass 'flipped' if winner.id is 1
-      $('body').attr 'data-show', 'victory'
+      document.getElementById('playerId').textContent = winner.id
+      document.getElementById('victory').className = if winner.id is 1 then 'screen flipped' else 'screen'
+      document.body.dataset.show = 'victory'
 
       instance = createjs.Sound.play 'worldklass',
         volume: 1
