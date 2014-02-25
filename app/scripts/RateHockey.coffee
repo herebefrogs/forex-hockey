@@ -8,6 +8,9 @@ define [ 'require'
   class RateHockey
 
     constructor: ->
+      @scaleCanvas()
+      window.addEventListener 'resize', @scaleCanvas
+
       # initialize sound system and load sound assets
       if not createjs.Sound.initializeDefaultPlugins()
         console.error 'createjs.Sound failed to initialize'
@@ -96,3 +99,17 @@ define [ 'require'
 
       setTimeout ( => @showStartScreen() ), 5000
 
+    scaleCanvas: =>
+        canvasStyle = document.getElementById('canvas').style
+        width = window.innerWidth
+        height = window.innerHeight
+
+        normalizedWidth = 480 * height / 640
+        normalizedHeight = 640 * width / 480
+
+        if width > normalizedWidth 
+            canvasStyle.width = "#{normalizedWidth}px"
+            canvasStyle.height = "#{height}px"
+        else
+            canvasStyle.width = "#{width}px"
+            canvasStyle.height = "#{normalizedHeight}px"

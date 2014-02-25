@@ -18,35 +18,37 @@
     <body data-show="splash">
         <section id="splash" class="screen">
             <div class="jumbotron">
-                <div>
-                    <img src="images/oanda-8bit-logo.png" alt="8-bit OANDA logo" width="200" height="200">
-                    OANDA presents
-                </div>
-                <div>a Jerome Lecomte & K Duker production</div>
+                <div>OANDA presents</div>
+                <img src="images/oanda-8bit-logo.png" alt="8-bit OANDA logo" width="200" height="200">
+                <div>a Jerome&nbsp;Lecomte & K&nbsp;Duker production</div>
             </div>
         </section>
         <section id="start" class="screen">
             <div class="header">
-                <div class="green puck">Rate</div>
-                <div class="blue puck">Hockey</div>
+                <span class="green puck">Rate</span><span class="blue puck">Hockey</span>
+            </div>
+            <div class="footer">
+                <div class="under">Credits</div>
+                <div>Design & Programming: Jerome&nbsp;Lecomte</div>
+                <div>Voice: K&nbsp;Duker</div>
+                <div class="under">Special shout</div>
+                <div>Lan&nbsp;Luong, Jeff&nbsp;Razon & Lu&nbsp;Liu</div>
             </div>
             <div class="jumbotron">
                 <button class="red puck">Start</button>
             </div>
-            <div class="footer">
-                <div class="under">Credits</div>
-                <div>Design & Programming: Jerome Lecomte</div>
-                <div>Voice: K Duker</div>
-                <div class="under">Special shout</div>
-                <div>Lan Luong, Jeff Razon & Lu Liu</div>
-            </div>
         </section>
         <section id="game" class="screen">
-            <canvas id="canvas" width="766" height="1000">
+            <div class="jumbotron">
+                <canvas id="canvas" width="766" height="1000">
+            </div>
         </section>
         <section id="victory" class="screen" data-audio="sounds/worldklass.mp3">
-            <img src="images/worldklass.jpg" width="667" height="1000">
-            <div class="congratulations">WORLD KLASS, PLAYER <span id="playerId"></span>!</div>
+            <div class="header">former OANDA CEO K Duker</div>
+            <div class="footer">WORLD KLASS, PLAYER&nbsp;<span id="playerId"></span>!</div>
+        </section>
+        <section id="rotate-portrait" class="screen">
+            <div>Please rotate your device to portrait mode</div>
         </section>
 
         <script>
