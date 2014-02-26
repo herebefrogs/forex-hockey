@@ -13,8 +13,7 @@ define [ 'require'
         console.error 'createjs.Sound failed to initialize'
         return
 
-      soundFile = document.getElementById('victory').dataset.audio
-      createjs.Sound.registerSound soundFile, 'worldklass'
+      @soundFile = document.getElementById('victory').dataset.audio
 
       # initialize graphic system
       stage = new createjs.Stage 'canvas'
@@ -73,6 +72,11 @@ define [ 'require'
       document.body.dataset.show = 'game'
 
       @board.start()
+
+      # clear previous sound file so it can be played again if game has been restarted
+      createjs.Sound.removeSound 'worldklass'
+      # register and preload sound file to be ready to play on victory
+      createjs.Sound.registerSound @soundFile, 'worldklass'
 
     showVictoryScreen: (winner) =>
       ga 'send', 'pageview', '/rate-hockey/victory'
