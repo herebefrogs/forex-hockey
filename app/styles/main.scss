@@ -130,7 +130,7 @@ body {
 }
 
 /* smartphones */
-@media (min-height: 481px) and (max-height: 959px) {
+@media (min-height: 481px) and (max-height: 850px) {
   .red {
     width: 175px;
     height: 175px;
@@ -151,7 +151,7 @@ body {
 }
 
 /* regular tablets */
-@media (min-height: 960px) and (max-height: 1024px) {
+@media (min-height: 850px) and (max-height: 1024px) {
   .puck {
     border-width: 12px;
   }
