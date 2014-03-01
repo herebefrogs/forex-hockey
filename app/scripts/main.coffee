@@ -18,10 +18,19 @@ require [ 'RateHockey' ], () ->
     RateHockey.prototype.showStartScreen()
   ), 3000
 
+  start = document.getElementById('start').getElementsByTagName('button')[0]
+
+  start.ontouchstart = ->
+    start.classList.add 'pressed'
+
   # sound hack for mobile: closure to have a touch event
   # in the callstack when loading/playing files through SoundJS
+  start.ontouchend = start.onmouseup = (e) ->
+    start.classList.remove 'pressed'
 
-  document.getElementById('start').getElementsByTagName('button')[0].onclick = ->
     game = new RateHockey()
 
     game.showGameScreen()
+
+    # prevents mouseup from triggering if touchend is fired first
+    e.preventDefault()

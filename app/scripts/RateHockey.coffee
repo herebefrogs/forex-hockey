@@ -88,7 +88,7 @@ define [ 'require'
       @board.stop()
 
       document.getElementById('playerId').textContent = winner.id
-      document.getElementById('victory').className = if winner.id is 1 then 'screen flipped' else 'screen'
+      document.getElementById('victory').classList[if winner.id is 1 then 'add' else 'remove'] 'flipped'
       document.body.dataset.show = 'victory'
 
       instance = createjs.Sound.play 'worldklass',

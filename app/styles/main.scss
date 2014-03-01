@@ -95,7 +95,7 @@ body {
   @include user-select(none);
 }
 
-.red:active, .red:hover {
+.red:hover, .pressed {
   background-color: white;
 }
 
