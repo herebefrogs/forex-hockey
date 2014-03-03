@@ -30,6 +30,14 @@
   }
 }
 
+@mixin show-screen ($name) {
+  body[data-show=#{$name}].portrait {
+    ##{$name} {
+      display: block;
+    }
+  }
+}
+
 * {
   @include box-sizing(border-box);
 }
@@ -273,29 +281,11 @@ body {
 }
 
 /* screen transitions */
-body[data-show=splash] #splash {
-  display: block;
-}
+@include show-screen(splash);
+@include show-screen(start);
+@include show-screen(game);
+@include show-screen(victory);
 
-body[data-show=start] #start {
+body.landscape #rotate-portrait {
   display: block;
-}
-
-body[data-show=game] #game {
-  display: block;
-}
-
-body[data-show=victory] #victory {
-  display: block;
-}
-
-/* smartphones and tablets in landscape mode */
-@media (orientation: landscape) and (max-device-width: 1024px) {
-  #rotate-portrait {
-    display: block;
-    position: absolute;
-    top: 0;
-    background: #223;
-    padding-top: 50vh;
-  }
 }
