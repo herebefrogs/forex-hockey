@@ -280,6 +280,25 @@ body {
   }
 }
 
+#rotate-portrait {
+  img {
+    margin-bottom: 50px;
+    @include animation(rotatePortrait 2s steps(5, end) 0s infinite);
+  }
+}
+
+@include keyframes(rotatePortrait) {
+  0% {
+    @include transform(none);
+  }
+  60% {
+    @include transform(rotate(-90deg));
+  }
+  100% {
+    @include transform(rotate(-90deg));
+  }
+}
+
 /* screen transitions */
 @include show-screen(splash);
 @include show-screen(start);
