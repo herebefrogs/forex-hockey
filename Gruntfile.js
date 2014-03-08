@@ -349,31 +349,6 @@ module.exports = function (grunt) {
                 src: '**/*.js'
             }
         },
-        manifest: {
-            dist: {
-                options: {
-                    basePath: 'dist',
-                    cache: [
-                        'http://fonts.googleapis.com/css?family=Press+Start+2P',
-                        'http://themes.googleusercontent.com/static/fonts/pressstart2p/v2/8Lg6LX8-ntOHUQnvQ0E7o2jf3WypfQQP02nP_ZmoBRo.woff'
-                    ],
-                    network: [
-                        'http://www.google.analytics.com/analytics.js'
-                    ],
-                    timestamp: false,
-                    preferOnline: true
-                },
-                src: [
-                    'index.html',
-                    'favicon.ico',
-                    'scripts/*.js',
-                    'images/*.{png,jpg}',
-                    'sounds/*.mp3',
-                    'styles/*.css'
-                ],
-                dest: 'dist/rate-hockey.appcache'
-            }
-        },
         concurrent: {
             server: [
                 'compass',
@@ -434,8 +409,7 @@ module.exports = function (grunt) {
         'requirejs',
         'copy:dist',
         'rev',
-        'usemin',
-        'manifest'
+        'usemin'
     ]);
 
     grunt.registerTask('default', [
