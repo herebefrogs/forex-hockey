@@ -93,7 +93,7 @@ define [ 'require'
         createjs.Tween.get(winner.scoreText, { override: true }).to(
           scaleX: 4
           scaleY: 4
-          x: @stage.canvas.width / 2 - winner.scoreText.getMeasuredWidth() / 2
+          x: @stage.canvas.width / 2.5 - winner.scoreText.getMeasuredWidth() / 2
           y: -@stage.canvas.height / 2 + heightOffset * winner.scoreText.getMeasuredLineHeight()
         , 1000, createjs.Ease.easeOut)
         .wait(1000)
