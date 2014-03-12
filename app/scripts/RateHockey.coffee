@@ -30,9 +30,9 @@ define [ 'require'
         puckRadius: 85
         puckBorder: 5
         currencies: [ {
-           text: 'EUR'
-           symbol: '€'
-           color: '#2b2'
+            text: 'EUR'
+            symbol: '€'
+            color: '#22b'
           }, {
             text: 'GBP'
             symbol: '£'
@@ -40,7 +40,7 @@ define [ 'require'
           }, {
             text: 'USD'
             symbol: '$'
-            color: '#22b'
+            color: '#2b2'
           }
         ]
         winningCallback: @showVictoryScreen
