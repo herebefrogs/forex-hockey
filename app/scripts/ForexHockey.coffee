@@ -5,7 +5,7 @@ define [ 'require'
 
   GameBoard = require 'GameBoard'
 
-  class RateHockey
+  class ForexHockey
 
     constructor: ->
       @scaleCanvas()
@@ -65,12 +65,12 @@ define [ 'require'
         scoreBounce: 250
 
     showStartScreen: ->
-      ga 'send', 'pageview', '/rate-hockey/start'
+      ga 'send', 'pageview', '/forex-hockey/start'
 
       document.body.dataset.show = 'start'
 
     showGameScreen: ->
-      ga 'send', 'pageview', '/rate-hockey/game'
+      ga 'send', 'pageview', '/forex-hockey/game'
 
       document.body.dataset.show = 'game'
 
@@ -82,7 +82,7 @@ define [ 'require'
       createjs.Sound.registerSound @soundFile, 'worldklass'
 
     showVictoryScreen: (winner) =>
-      ga 'send', 'pageview', '/rate-hockey/victory'
+      ga 'send', 'pageview', '/forex-hockey/victory'
       ga 'send', 'event', 'game', "victory:player #{winner.id}", "score:#{winner.score}"
 
       @board.stop()

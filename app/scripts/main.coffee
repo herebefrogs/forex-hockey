@@ -9,10 +9,10 @@ require.config
     SoundJS: '../bower_components/SoundJS/lib/soundjs-0.5.2.min'
     TweenJS: '../bower_components/TweenJS/lib/tweenjs-0.5.1.min'
 
-require [ 'RateHockey' ], () ->
+require [ 'ForexHockey' ], () ->
   'use strict'
 
-  RateHockey = require 'RateHockey'
+  ForexHockey = require 'ForexHockey'
 
   onOrientationChange = ->
     if window.orientation in [-90, 90]
@@ -41,7 +41,7 @@ require [ 'RateHockey' ], () ->
   start.ontouchend = start.onmouseup = (e) ->
     start.classList.remove 'pressed'
 
-    game = new RateHockey()
+    game = new ForexHockey()
 
     game.showGameScreen()
 
@@ -49,5 +49,5 @@ require [ 'RateHockey' ], () ->
     e.preventDefault()
 
   setTimeout ( ->
-    RateHockey.prototype.showStartScreen()
+    ForexHockey.prototype.showStartScreen()
   ), 3000
