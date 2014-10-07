@@ -14,11 +14,16 @@ require [ 'ForexHockey' ], () ->
 
   ForexHockey = require 'ForexHockey'
 
-  onOrientationChange = ->
-    if window.orientation in [-90, 90]
-      document.body.className = 'landscape'
-    else
-      document.body.className = 'portrait'
+  if not window.orientation?
+    # laptop/desktop
+    document.body.className = 'portrait'
+  else
+    # smartphone/tablet
+    onOrientationChange = (mediaQuery) ->
+      if mediaQuery.matches
+        document.body.className = 'portrait'
+      else
+        document.body.className = 'landscape'
 
       # Mobile Safari doesn't update properly vw/vh used in CSS class 'screen'
       # after returning to portrait mode; yet body has correct dimensions
@@ -28,8 +33,10 @@ require [ 'ForexHockey' ], () ->
       screen.style.width = document.body.clientWidth + 'px'
       screen.style.height = document.body.clientHeight + 'px'
 
-  onOrientationChange()
-  window.addEventListener 'orientationchange', onOrientationChange
+    mediaQuery = window.matchMedia '(orientation: portrait)'
+
+    mediaQuery.addListener onOrientationChange
+    onOrientationChange mediaQuery
 
   start = document.getElementById('start').getElementsByTagName('button')[0]
 
