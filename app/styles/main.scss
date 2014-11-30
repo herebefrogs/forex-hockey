@@ -40,11 +40,11 @@
 
 * {
   @include box-sizing(border-box);
+  font-family: "Press Start 2P", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  font-family: "Press Start 2P", Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
 
   background: #223;
   color: white;
@@ -59,9 +59,8 @@ body {
   height: 100vh;
 }
 
-.header {
-  position: absolute;
-  top: 1%;
+header {
+  margin-top: 50px;
   width: 100%;
 }
 
@@ -73,37 +72,64 @@ body {
   width: 100%;
 }
 
-.footer {
+footer {
   position: absolute;
-  bottom: 1%;
+  bottom: 10px;
   width: 100%;
 }
 
-.under {
+.col-left {
   text-decoration: underline;
 }
 
-.puck {
+@media (max-width: 800px) {
+  .col-left, .col-right {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .col-left {
+    margin-bottom: 5px;
+  }
+  .col-right {
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 801px) {
+  .col-left, .col-right {
+    display: inline-block;
+    width: 49%;
+    margin-bottom: 10px;
+  }
+
+  .col-left {
+    text-align: right;
+  }
+
+  .col-right {
+    margin-left: 1%;
+    text-align: left;
+  }
+}
+
+.round {
   display: inline-block;
   border-radius: 50%;
   border: solid 10px white;
 }
 
-.green {
-  background-color: #2b2;
-}
-
-.blue {
-  background-color: #22b;
-}
-
 .red {
   background-color: #b22;
+}
+
+.blink {
   @include animation(blinkRed 1s steps(1, end) 0s infinite);
   @include user-select(none);
 }
 
-.red:hover, .pressed {
+.blink:hover, .pressed {
   background-color: white;
 }
 
@@ -118,90 +144,40 @@ body {
 
 /* iPhone 4 */
 @media (max-height: 480px) {
-  .red {
-    width: 140px;
-    height: 140px;
-    font-size: 1.2em;
-  }
-  .green {
+  .blink {
     width: 125px;
     height: 125px;
     line-height: 110px;
-    font-size: 1.2em;
-  }
-  .blue {
-    width: 150px;
-    height: 150px;
-    line-height: 135px;
     font-size: 1.2em;
   }
 }
 
 /* smartphones */
 @media (min-height: 481px) and (max-height: 850px) {
-  .red {
-    width: 175px;
-    height: 175px;
-    font-size: 1.2em;
-  }
-  .green {
+  .blink {
     width: 150px;
     height: 150px;
     line-height: 130px;
-    font-size: 1.4em;
-  }
-  .blue {
-    width: 175px;
-    height: 175px;
-    line-height: 155px;
     font-size: 1.4em;
   }
 }
 
 /* regular tablets */
 @media (min-height: 851px) and (max-height: 1024px) {
-  .puck {
-    border-width: 12px;
-  }
-  .red {
-      width: 300px;
-      height: 300px;
-      font-size: 2.2em;
-    }
-  .green {
+  .blink {
     width: 175px;
     height: 175px;
     line-height: 150px;
-    font-size: 1.6em;
-  }
-  .blue {
-    width: 225px;
-    height: 225px;
-    line-height: 210px;
     font-size: 1.6em;
   }
 }
 
 /* large tablets */
 @media (min-height: 1025px) {
-  .puck {
-    border-width: 18px;
-  }
-  .red {
-    width: 350px;
-    height: 350px;
-    font-size: 2.6em;
-  }
-  .green {
+  .blink {
     width: 225px;
     height: 225px;
     line-height: 190px;
-    font-size: 2em;
-  }
-  .blue {
-    width: 275px;
-    height: 275px;
-    line-height: 250px;
     font-size: 2em;
   }
 }
@@ -228,8 +204,8 @@ body {
 
 #start {
   button {
+    padding: 0;
     cursor: pointer;
-    font-family: "Press Start 2P", Arial, sans-serif;
 
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     &:focus {
@@ -237,9 +213,8 @@ body {
     }
   }
 
-  .footer {
+  footer {
     div {
-      margin-top: 2%;
       font-size: 0.8em;
     }
   }
@@ -254,12 +229,15 @@ body {
 #victory {
   background: url(../images/worldklass.jpg) 50% 0% no-repeat;
 
-  .header {
+  header {
+    position: absolute;
+    top: 1%;
+    margin-top: 0;
     color: black;
     font-size: 0.8em;
   }
 
-  .footer {
+  footer {
     bottom: 10%;
     font-size: 1.6em;
     @include transform(scale(1, 3));

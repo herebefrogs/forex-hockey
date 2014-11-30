@@ -194,6 +194,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     src: [
+                        '<%= yeoman.dist %>/{,*/}*.json',
                         '<%= yeoman.dist %>/scripts/{,*/}*.js',
                         '<%= yeoman.dist %>/styles/{,*/}*.css',
                         '<%= yeoman.dist %>/images/{,*/}*.{gif,jpeg,jpg,png,webp}',
@@ -249,7 +250,13 @@ module.exports = function (grunt) {
         usemin: {
             options: {
                 assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images'],
+                patterns: {
+                  json: [
+                    [/(appicon\.png)/, 'Replacing reference to appicon.png']
+                  ]
+                }
             },
+            json: ['<%= yeoman.dist %>/{,*/}*.json'],
             html: ['<%= yeoman.dist %>/{,*/}*.html'],
             css: ['<%= yeoman.dist %>/styles/{,*/}*.css']
         },
@@ -320,6 +327,7 @@ module.exports = function (grunt) {
                     dest: '<%= yeoman.dist %>',
                     src: [
                         '*.{ico,png,txt}',
+                        '{,*/}*.json',
                         '.htaccess',
                         'images/{,*/}*.{webp,gif}',
                         'sounds/{,*/}*.mp3',

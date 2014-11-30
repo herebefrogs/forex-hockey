@@ -38,7 +38,7 @@ require [ 'ForexHockey' ], () ->
     mediaQuery.addListener onOrientationChange
     onOrientationChange mediaQuery
 
-  start = document.getElementById('start').getElementsByTagName('button')[0]
+  start = document.getElementById('btn-start')
 
   start.ontouchstart = ->
     start.classList.add 'pressed'
