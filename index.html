@@ -4,14 +4,15 @@
         <meta charset="utf-8">
         <title>Forex Hockey</title>
         <meta name="apple-mobile-web-app-title" content="Forex Hockey">
-        <meta name="description" content="a 2 player, multitouch game mashup of Air Hockey, Hungry Hungry Hippo and OANDA Forex rates best enjoyed on an iPad">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="manifest" href="14e6206a.manifest.json">
         <link rel="icon" sizes="196x196" href="images/8ad1f8ef.appicon.png">
         <link rel="apple-touch-icon" sizes="156x156" href="images/66868477.touchicon.png">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="description" content="a 2 player, multitouch game mashup of Air Hockey, Hungry Hungry Hippo and OANDA Forex rates best enjoyed on an iPad">
         <link href="http://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="styles/c9845777.main.css"/>
+        <link rel="stylesheet" href="styles/feff3c0a.main.css"/>
     </head>
     <body data-show="splash">
         <section id="splash" class="screen">
@@ -22,19 +23,23 @@
             </div>
         </section>
         <section id="start" class="screen">
-            <div class="header">
-                <span class="green puck">Forex</span><span class="blue puck">Hockey</span>
-            </div>
-            <div class="footer">
-                <div class="under">Credits</div>
-                <div>Design & Programming: Jerome&nbsp;Lecomte</div>
-                <div>Voice: K&nbsp;Duker</div>
-                <div class="under">Special shout</div>
-                <div>Lan&nbsp;Luong, Jeff&nbsp;Razon & Lu&nbsp;Liu</div>
-            </div>
+            <header>
+                <h1>Forex Hockey</h1>
+            </header>
             <div class="jumbotron">
-                <button class="red puck">Start</button>
+                <button id="btn-start" class="red round blink">Start</button>
             </div>
+            <footer>
+                <div>
+                  <span class="col-left">Voice</span><span class="col-right">K&nbsp;Duker</span>
+                </div>
+                <div>
+                  <span class="col-left">Design &amp; Programming</span><span class="col-right">Jerome&nbsp;Lecomte</span>
+                </div>
+                <div class="optional">
+                  <span class="col-left">Special shout</span><span class="col-right">Lu&nbsp;Liu, Lan&nbsp;Luong &amp; Jeff&nbsp;Razon</span>
+                </div>
+            </footer>
         </section>
         <section id="game" class="screen">
             <div class="jumbotron">
@@ -42,8 +47,8 @@
             </canvas></div>
         </section>
         <section id="victory" class="screen" data-audio="sounds/f9ef856f.worldklass.mp3">
-            <div class="header">former OANDA CEO K Duker</div>
-            <div class="footer">WORLD KLASS, PLAYER&nbsp;<span id="playerId"></span>!</div>
+            <header>former OANDA CEO K Duker</header>
+            <footer>WORLD KLASS, PLAYER&nbsp;<span id="playerId"></span>!</footer>
         </section>
         <section id="rotate-portrait" class="screen">
             <div class="jumbotron">
@@ -61,7 +66,7 @@
           ga('send', 'pageview', '/forex-hockey/splash');
         </script>
 
-        <script src="scripts/ae3b779e.vendors.js"></script>
-        <script src="scripts/abd8734c.main.js"></script>
+        <script src="scripts/6ceba28f.vendors.js"></script>
+        <script src="scripts/2825815b.main.js"></script>
 </body>
 </html>
