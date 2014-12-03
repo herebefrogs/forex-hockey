@@ -252,7 +252,7 @@ module.exports = function (grunt) {
                 assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images'],
                 patterns: {
                   json: [
-                    [/(appicon\.png)/, 'Replacing reference to appicon.png']
+                    [/(\w+\.png)/, 'Replacing reference to PNGs']
                   ]
                 }
             },
