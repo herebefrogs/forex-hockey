@@ -194,12 +194,18 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     src: [
-                        '<%= yeoman.dist %>/{,*/}*.json',
                         '<%= yeoman.dist %>/scripts/{,*/}*.js',
                         '<%= yeoman.dist %>/styles/{,*/}*.css',
                         '<%= yeoman.dist %>/images/{,*/}*.{gif,jpeg,jpg,png,webp}',
                         '<%= yeoman.dist %>/sounds/{,*/}*.mp3',
                         '<%= yeoman.dist %>/styles/fonts/{,*/}*.*'
+                    ]
+                }
+            },
+            manifest: {
+                files: {
+                    src: [
+                        '<%= yeoman.dist %>/{,*/}*.json',
                     ]
                 }
             }
@@ -416,8 +422,11 @@ module.exports = function (grunt) {
         'cssmin',
         'requirejs',
         'copy:dist',
-        'rev',
-        'usemin'
+        'rev:dist',
+        'usemin:css',
+        'usemin:json',
+        'rev:manifest',
+        'usemin:html'
     ]);
 
     grunt.registerTask('default', [
