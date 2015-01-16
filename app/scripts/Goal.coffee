@@ -1,6 +1,9 @@
 define [ 'require'
          'EaselJS'
+         'Haptics'
          'TweenJS' ], (require) ->
+
+  Haptics = require 'Haptics'
 
   class Goal
 
@@ -72,6 +75,7 @@ define [ 'require'
       @updateCurrencyAndValueX()
       @animate @valueText
 
+      Haptics.vibrate 10
       @goal.graphics.f(currency.color).dr(0, 0, @width, 75).ef()
 
     updateCurrencyAndValueX: ->
