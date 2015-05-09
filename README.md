@@ -3,7 +3,7 @@ Forex Hockey
 
 A 2-player, multitouch game mashup of Air Hockey, Hungry Hungry Hippos and OANDA Forex rates where the winning player is congratulated by former OANDA CEO K Duker in person. Best enjoyed on iPad. Initially developed in 24 hours during OANDA's December 2013 hackathon.
 
-Play Forex Hockey at [jerle76.github.io/forex-hockey/](http://jerle76.github.io/forex-hockey/)
+Play Forex Hockey at [herebefrogs.com/forex-hockey/](http://herebefrogs.com/forex-hockey/)
 
 It is a HTML5 reimplementation of Michael Brough's [O](http://mightyvision.blogspot.co.uk/2012/10/o.html). However instead of being random, the apparition of pucks onto the playfield is driven by the Forex market and prices of 3 currency pairs on the OANDA online Forex trading platform.
 
