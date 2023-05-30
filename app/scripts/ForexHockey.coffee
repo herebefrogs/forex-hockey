@@ -65,12 +65,12 @@ define [ 'require'
         scoreBounce: 250
 
     showStartScreen: ->
-      ga 'send', 'pageview', '/forex-hockey/start'
+      gtag 'event', 'pageview', { 'send_to': '/forex-hockey/start' }
 
       document.body.dataset.show = 'start'
 
     showGameScreen: ->
-      ga 'send', 'pageview', '/forex-hockey/game'
+      gtag 'event', 'pageview', { 'send_to': '/forex-hockey/game' }
 
       document.body.dataset.show = 'game'
 
@@ -82,8 +82,11 @@ define [ 'require'
       createjs.Sound.registerSound @soundFile, 'worldklass'
 
     showVictoryScreen: (winner) =>
-      ga 'send', 'pageview', '/forex-hockey/victory'
-      ga 'send', 'event', 'game', "victory:player #{winner.id}", "score:#{winner.score}"
+      gtag 'event', 'pageview', { 'send_to': '/forex-hockey/victory' }
+      gtag 'event', "victory:player #{winner.id}", {
+        'event_category': 'game',
+        'event_label': "score:#{winner.score}"
+      }
 
       @board.stop()
 

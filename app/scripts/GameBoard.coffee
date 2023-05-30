@@ -62,11 +62,17 @@ define [ 'require'
       for puck in @pucks
         if puck.shape.y < 0
           @player1.add puck.currency
-          ga 'send', 'event', 'game', 'goal:player 1', "score:#{@player1.score}"
+          gtag 'event', 'goal:player 1', {
+            'event_category': 'game',
+            'event_label': "score:#{@player1.score}"
+          }
           remove.push puck
         else if puck.shape.y > @stage.canvas.height
           @player2.add puck.currency
-          ga 'send', 'event', 'game', 'goal:player 2', "score:#{@player2.score}"
+          gtag 'event', 'goal:player 2', {
+            'event_category': 'game',
+            'event_label': "score:#{@player2.score}"
+          }
           remove.push puck
 
       for puck in remove
